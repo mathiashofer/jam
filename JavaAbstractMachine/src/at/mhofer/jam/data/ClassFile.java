@@ -9,12 +9,13 @@ import java.io.InputStream;
 
 public class ClassFile
 {
-	
 	private int magic;
 	
 	private short minor_version;
 	private short major_version;
 	private short constant_pool_count;
+	
+	private CpInfo[] constant_pool;
 	
 	public ClassFile(File clazz) throws IOException
 	{
@@ -29,6 +30,7 @@ public class ClassFile
 		this.minor_version = in.readShort();
 		this.major_version = in.readShort();
 		this.constant_pool_count = in.readShort();
+		this.constant_pool = new CpInfo[constant_pool_count - 1];
 	}
 
 	@Override
