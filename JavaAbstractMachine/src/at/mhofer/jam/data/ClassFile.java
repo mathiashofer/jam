@@ -7,6 +7,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import at.mhofer.jam.data.constantpool.CpInfo;
+
+/**
+ * Represents the class file in memory
+ * 
+ * @author Mathias
+ *
+ */
 public class ClassFile
 {
 	private int magic;
