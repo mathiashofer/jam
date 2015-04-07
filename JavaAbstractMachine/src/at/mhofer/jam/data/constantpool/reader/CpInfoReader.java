@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import at.mhofer.jam.data.constantpool.CpInfo;
 
-public interface CpReader
+public interface CpInfoReader
 {
 	
 	public CpInfo readInfo(DataInputStream in) throws IOException;

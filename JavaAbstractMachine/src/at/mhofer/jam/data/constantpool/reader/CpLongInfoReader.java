@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import at.mhofer.jam.data.constantpool.CpLongInfo;
 
-public class CpLongInfoReader implements CpReader
+public class CpLongInfoReader implements CpInfoReader
 {
 
 	@Override

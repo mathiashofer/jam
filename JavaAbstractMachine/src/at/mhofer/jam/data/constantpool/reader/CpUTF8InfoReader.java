@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import at.mhofer.jam.data.constantpool.CpUTF8Info;
 
-public class CpUTF8InfoReader implements CpReader
+public class CpUTF8InfoReader implements CpInfoReader
 {
 
 	@Override

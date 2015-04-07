@@ -6,7 +6,7 @@ import java.io.IOException;
 import at.mhofer.jam.data.constantpool.CpInvokeDynamicInfo;
 
 
-public class CpInvokeDynamicInfoReader implements CpReader
+public class CpInvokeDynamicInfoReader implements CpInfoReader
 {
 
 	@Override
