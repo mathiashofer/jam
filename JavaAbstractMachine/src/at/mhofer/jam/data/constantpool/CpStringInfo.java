@@ -9,9 +9,9 @@ public class CpStringInfo implements CpInfo
 	 * CONSTANT_Utf8_info structure (§4.4.7) representing the sequence of
 	 * Unicode code points to which the String object is to be initialized.
 	 */
-	private short stringIndex;
+	private int stringIndex;
 
-	public CpStringInfo(short stringIndex)
+	public CpStringInfo(int stringIndex)
 	{
 		this.stringIndex = stringIndex;
 	}
@@ -22,7 +22,7 @@ public class CpStringInfo implements CpInfo
 		return CpTag.STRING;
 	}
 
-	public short getStringIndex()
+	public int getStringIndex()
 	{
 		return stringIndex;
 	}

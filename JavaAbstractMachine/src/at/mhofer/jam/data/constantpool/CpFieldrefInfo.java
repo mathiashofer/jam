@@ -12,7 +12,7 @@ public class CpFieldrefInfo implements CpInfo
 	 * The class_index item of a CONSTANT_Fieldref_info structure may be either
 	 * a class type or an interface type.
 	 */
-	private short classIndex;
+	private int classIndex;
 
 	/**
 	 * The value of the name_and_type_index item must be a valid index into the
@@ -23,9 +23,9 @@ public class CpFieldrefInfo implements CpInfo
 	 * In a CONSTANT_Fieldref_info, the indicated descriptor must be a field
 	 * descriptor (§4.3.2).
 	 */
-	private short nameAndTypeIndex;
+	private int nameAndTypeIndex;
 
-	public CpFieldrefInfo(short classIndex, short nameAndTypeIndex)
+	public CpFieldrefInfo(int classIndex, int nameAndTypeIndex)
 	{
 		this.classIndex = classIndex;
 		this.nameAndTypeIndex = nameAndTypeIndex;
@@ -37,12 +37,12 @@ public class CpFieldrefInfo implements CpInfo
 		return CpTag.FIELDREF;
 	}
 
-	public short getClassIndex()
+	public int getClassIndex()
 	{
 		return classIndex;
 	}
 
-	public short getNameAndTypeIndex()
+	public int getNameAndTypeIndex()
 	{
 		return nameAndTypeIndex;
 	}

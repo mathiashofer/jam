@@ -11,8 +11,8 @@ public class CpNameAndTypeInfoReader implements CpInfoReader
 	@Override
 	public CpNameAndTypeInfo readInfo(DataInputStream in) throws IOException
 	{
-		short nameIndex = in.readShort();
-		short descriptorIndex = in.readShort();
+		int nameIndex = in.readUnsignedShort();
+		int descriptorIndex = in.readUnsignedShort();
 		return new CpNameAndTypeInfo(nameIndex, descriptorIndex);
 	}
 

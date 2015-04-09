@@ -12,7 +12,7 @@ public class CpMethodrefInfo implements CpInfo
 	 * The class_index item of a CONSTANT_Methodref_info structure must be a
 	 * class type, not an interface type.
 	 */
-	private short classIndex;
+	private int classIndex;
 
 	/**
 	 * The value of the name_and_type_index item must be a valid index into the
@@ -27,9 +27,9 @@ public class CpMethodrefInfo implements CpInfo
 	 * representing an instance initialization method (§2.9). The return type of such
 	 * a method must be void.
 	 */
-	private short nameAndTypeIndex;
+	private int nameAndTypeIndex;
 
-	public CpMethodrefInfo(short classIndex, short nameAndTypeIndex)
+	public CpMethodrefInfo(int classIndex, int nameAndTypeIndex)
 	{
 		this.classIndex = classIndex;
 		this.nameAndTypeIndex = nameAndTypeIndex;
@@ -41,12 +41,12 @@ public class CpMethodrefInfo implements CpInfo
 		return CpTag.METHODREF;
 	}
 
-	public short getClassIndex()
+	public int getClassIndex()
 	{
 		return classIndex;
 	}
 
-	public short getNameAndTypeIndex()
+	public int getNameAndTypeIndex()
 	{
 		return nameAndTypeIndex;
 	}

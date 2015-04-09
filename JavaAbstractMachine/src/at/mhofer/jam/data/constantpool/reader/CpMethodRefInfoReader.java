@@ -11,8 +11,8 @@ public class CpMethodRefInfoReader implements CpInfoReader
 	@Override
 	public CpMethodrefInfo readInfo(DataInputStream in) throws IOException
 	{
-		short classIndex = in.readShort();
-		short nameAndTypeIndex = in.readShort();
+		int classIndex = in.readUnsignedShort();
+		int nameAndTypeIndex = in.readUnsignedShort();
 		return new CpMethodrefInfo(classIndex, nameAndTypeIndex);
 	}
 

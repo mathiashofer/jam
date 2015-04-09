@@ -11,8 +11,8 @@ public class CpFieldRefInfoReader implements CpInfoReader
 	@Override
 	public CpFieldrefInfo readInfo(DataInputStream in) throws IOException
 	{
-		short classIndex = in.readShort();
-		short nameAndTypeIndex = in.readShort();
+		int classIndex = in.readUnsignedShort();
+		int nameAndTypeIndex = in.readUnsignedShort();
 		return new CpFieldrefInfo(classIndex, nameAndTypeIndex);
 	}
 

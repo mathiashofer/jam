@@ -8,7 +8,7 @@ public class CpInvokeDynamicInfo implements CpInfo
 	 * into the bootstrap_methods array of the bootstrap method table (§4.7.23)
 	 * of this class file.
 	 */
-	private short bootstrapMethodAttrIndex;
+	private int bootstrapMethodAttrIndex;
 
 	/**
 	 * The value of the name_and_type_index item must be a valid index into the
@@ -16,9 +16,9 @@ public class CpInvokeDynamicInfo implements CpInfo
 	 * CONSTANT_NameAndType_info structure (§4.4.6) representing a method name
 	 * and method descriptor (§4.3.3).
 	 */
-	private short nameAndTypeIndex;
+	private int nameAndTypeIndex;
 
-	public CpInvokeDynamicInfo(short bootstrapMethodAttrIndex, short nameAndTypeIndex)
+	public CpInvokeDynamicInfo(int bootstrapMethodAttrIndex, int nameAndTypeIndex)
 	{
 		this.bootstrapMethodAttrIndex = bootstrapMethodAttrIndex;
 		this.nameAndTypeIndex = nameAndTypeIndex;
@@ -30,12 +30,12 @@ public class CpInvokeDynamicInfo implements CpInfo
 		return CpTag.INVOKE_DYNAMIC;
 	}
 
-	public short getBootstrapMethodAttrIndex()
+	public int getBootstrapMethodAttrIndex()
 	{
 		return bootstrapMethodAttrIndex;
 	}
 
-	public short getNameAndTypeIndex()
+	public int getNameAndTypeIndex()
 	{
 		return nameAndTypeIndex;
 	}

@@ -49,9 +49,9 @@ public class CpMethodHandleInfo implements CpInfo
 	 * <clinit>. If the value is 8 (REF_newInvokeSpecial), the name of the
 	 * method represented by a CONSTANT_Methodref_info structure must be <init>.
 	 */
-	private short referenceIndex;
+	private int referenceIndex;
 
-	public CpMethodHandleInfo(byte referenceKind, short referenceIndex)
+	public CpMethodHandleInfo(byte referenceKind, int referenceIndex)
 	{
 		this.referenceKind = referenceKind;
 		this.referenceIndex = referenceIndex;
@@ -68,7 +68,7 @@ public class CpMethodHandleInfo implements CpInfo
 		return referenceKind;
 	}
 
-	public short getReferenceIndex()
+	public int getReferenceIndex()
 	{
 		return referenceIndex;
 	}

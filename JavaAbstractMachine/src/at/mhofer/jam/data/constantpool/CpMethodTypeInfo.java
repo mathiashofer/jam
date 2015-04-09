@@ -9,9 +9,9 @@ public class CpMethodTypeInfo implements CpInfo
 	 * CONSTANT_Utf8_info structure (§4.4.7) representing a method descriptor
 	 * (§4.3.3).
 	 */
-	private short descriptorIndex;
+	private int descriptorIndex;
 
-	public CpMethodTypeInfo(short descriptorIndex)
+	public CpMethodTypeInfo(int descriptorIndex)
 	{
 		this.descriptorIndex = descriptorIndex;
 	}
@@ -22,7 +22,7 @@ public class CpMethodTypeInfo implements CpInfo
 		return CpTag.METHOD_TYPE;
 	}
 
-	public short getDescriptorIndex()
+	public int getDescriptorIndex()
 	{
 		return descriptorIndex;
 	}

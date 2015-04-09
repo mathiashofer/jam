@@ -12,8 +12,8 @@ public class CpInvokeDynamicInfoReader implements CpInfoReader
 	@Override
 	public CpInvokeDynamicInfo readInfo(DataInputStream in) throws IOException
 	{
-		short bootstrapMethodAttrIndex = in.readShort();
-		short nameAndTypeIndex = in.readShort();
+		int bootstrapMethodAttrIndex = in.readUnsignedShort();
+		int nameAndTypeIndex = in.readUnsignedShort();
 		return new CpInvokeDynamicInfo(bootstrapMethodAttrIndex, nameAndTypeIndex);
 	}
 

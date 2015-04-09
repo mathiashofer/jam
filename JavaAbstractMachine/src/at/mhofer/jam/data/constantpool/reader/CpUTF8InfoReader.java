@@ -11,7 +11,7 @@ public class CpUTF8InfoReader implements CpInfoReader
 	@Override
 	public CpUTF8Info readInfo(DataInputStream in) throws IOException
 	{
-		short length = in.readShort();
+		int length = in.readUnsignedShort();
 		byte[] bytes = new byte[length];
 		in.readFully(bytes);
 		return new CpUTF8Info(bytes);

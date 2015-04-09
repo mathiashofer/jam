@@ -1,5 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
+
 public class CpUTF8Info implements CpInfo
 {
 
@@ -7,7 +8,7 @@ public class CpUTF8Info implements CpInfo
 	 * The value of the length item gives the number of bytes in the bytes array
 	 * (not the length of the resulting string).
 	 */
-	private short length;
+	private int length;
 
 	/**
 	 * The bytes array contains the bytes of the string. No byte may have the
@@ -22,10 +23,10 @@ public class CpUTF8Info implements CpInfo
 	 * Look at the specification for further encoding information.
 	 */
 	private byte[] bytes;
-
+	
 	public CpUTF8Info(byte[] bytes)
 	{
-		this.length = (short) bytes.length;
+		this.length = bytes.length;
 		this.bytes = bytes;
 	}
 
@@ -35,7 +36,7 @@ public class CpUTF8Info implements CpInfo
 		return CpTag.UTF8;
 	}
 
-	public short getLength()
+	public int getLength()
 	{
 		return length;
 	}
@@ -45,4 +46,11 @@ public class CpUTF8Info implements CpInfo
 		return bytes;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "CpUTF8Info [length=" + length + ", bytes=" + new String(bytes) + "]";
+	}
+
+	
 }

@@ -11,7 +11,7 @@ public class CpInterfaceMethodrefInfo implements CpInfo
 	 * The class_index item of a CONSTANT_InterfaceMethodref_info structure must
 	 * be an interface type.
 	 */
-	private short classIndex;
+	private int classIndex;
 
 	/**
 	 * The value of the name_and_type_index item must be a valid index into the
@@ -21,9 +21,9 @@ public class CpInterfaceMethodrefInfo implements CpInfo
 	 * 
 	 * The indicated descriptor must be a method descriptor (§4.3.3).
 	 */
-	private short nameAndTypeIndex;
+	private int nameAndTypeIndex;
 
-	public CpInterfaceMethodrefInfo(short classIndex, short nameAndTypeIndex)
+	public CpInterfaceMethodrefInfo(int classIndex, int nameAndTypeIndex)
 	{
 		this.classIndex = classIndex;
 		this.nameAndTypeIndex = nameAndTypeIndex;
@@ -35,12 +35,12 @@ public class CpInterfaceMethodrefInfo implements CpInfo
 		return CpTag.INTERFACE_METHODREF;
 	}
 
-	public short getClassIndex()
+	public int getClassIndex()
 	{
 		return classIndex;
 	}
 
-	public short getNameAndTypeIndex()
+	public int getNameAndTypeIndex()
 	{
 		return nameAndTypeIndex;
 	}

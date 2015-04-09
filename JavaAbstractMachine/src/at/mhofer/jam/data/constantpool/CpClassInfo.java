@@ -16,9 +16,9 @@ public class CpClassInfo implements CpInfo
 	 * CONSTANT_Utf8_info structure (§4.4.7) representing a valid binary class
 	 * or interface name encoded in internal form (§4.2.1).
 	 */
-	private short nameIndex;
+	private int nameIndex;
 
-	public CpClassInfo(short nameIndex)
+	public CpClassInfo(int nameIndex)
 	{
 		this.nameIndex = nameIndex;
 	}
@@ -29,7 +29,7 @@ public class CpClassInfo implements CpInfo
 		return CpTag.CLASS;
 	}
 
-	public short getNameIndex()
+	public int getNameIndex()
 	{
 		return nameIndex;
 	}
