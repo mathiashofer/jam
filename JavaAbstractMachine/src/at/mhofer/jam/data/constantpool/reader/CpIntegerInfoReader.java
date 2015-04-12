@@ -9,7 +9,7 @@ public class CpIntegerInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpIntegerInfo readInfo(DataInputStream in) throws IOException
+	public CpIntegerInfo readData(DataInputStream in) throws IOException
 	{
 		int bytes = in.readInt();
 		return new CpIntegerInfo(bytes);

@@ -9,7 +9,7 @@ public class CpDoubleInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpDoubleInfo readInfo(DataInputStream in) throws IOException
+	public CpDoubleInfo readData(DataInputStream in) throws IOException
 	{
 		double bytes = in.readDouble();
 		return new CpDoubleInfo(bytes);

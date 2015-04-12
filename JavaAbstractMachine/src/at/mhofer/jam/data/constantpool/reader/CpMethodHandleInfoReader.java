@@ -9,7 +9,7 @@ public class CpMethodHandleInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpMethodHandleInfo readInfo(DataInputStream in) throws IOException
+	public CpMethodHandleInfo readData(DataInputStream in) throws IOException
 	{
 		/**
 		 * readByte() ist used instead of readUnsignedByte(), because

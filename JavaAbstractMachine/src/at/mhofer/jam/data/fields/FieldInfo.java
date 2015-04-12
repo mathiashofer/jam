@@ -8,19 +8,20 @@ public class FieldInfo
 {
 
 	/**
-	 * Stores all AccessFlags for this Field. A HashSet is used, because of its constant time for contains().
+	 * Stores all AccessFlags for this Field. A HashSet is used, because of its
+	 * constant time for contains().
 	 */
 	private HashSet<AccessFlag> accessFlags;
-	
-	private short nameIndex;
-	
-	private short descriptorIndex;
-	
+
+	private int nameIndex;
+
+	private int descriptorIndex;
+
 	private short attributesCount;
-	
+
 	private AttributeInfo[] attributes;
 
-	public FieldInfo(AccessFlag[] accessFlags, short nameIndex, short descriptorIndex,
+	public FieldInfo(AccessFlag[] accessFlags, int nameIndex, int descriptorIndex,
 			short attributesCount, AttributeInfo[] attributes)
 	{
 		super();
@@ -40,12 +41,12 @@ public class FieldInfo
 		return accessFlags;
 	}
 
-	public short getNameIndex()
+	public int getNameIndex()
 	{
 		return nameIndex;
 	}
 
-	public short getDescriptorIndex()
+	public int getDescriptorIndex()
 	{
 		return descriptorIndex;
 	}
@@ -59,5 +60,5 @@ public class FieldInfo
 	{
 		return attributes;
 	}
-	
+
 }

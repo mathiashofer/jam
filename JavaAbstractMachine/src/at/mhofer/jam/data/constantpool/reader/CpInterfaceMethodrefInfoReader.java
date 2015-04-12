@@ -9,7 +9,7 @@ public class CpInterfaceMethodrefInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpInterfaceMethodrefInfo readInfo(DataInputStream in) throws IOException
+	public CpInterfaceMethodrefInfo readData(DataInputStream in) throws IOException
 	{
 		int classIndex = in.readUnsignedShort();
 		int nameAndTypeIndex = in.readUnsignedShort();

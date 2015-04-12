@@ -9,7 +9,7 @@ public class CpFloatInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpFloatInfo readInfo(DataInputStream in) throws IOException
+	public CpFloatInfo readData(DataInputStream in) throws IOException
 	{
 		float bytes = in.readFloat();
 		return new CpFloatInfo(bytes);

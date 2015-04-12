@@ -19,6 +19,7 @@ public class Interpreter
 		
 		int bytes = 0x0001 | 0x0010;
 		System.out.println(Arrays.toString(AccessFlag.fromBytes(bytes)));
+				
 	}
 	
 }

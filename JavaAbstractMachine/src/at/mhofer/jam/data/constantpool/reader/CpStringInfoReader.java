@@ -9,7 +9,7 @@ public class CpStringInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpStringInfo readInfo(DataInputStream in) throws IOException
+	public CpStringInfo readData(DataInputStream in) throws IOException
 	{
 		int stringIndex = in.readUnsignedShort();
 		return new CpStringInfo(stringIndex);

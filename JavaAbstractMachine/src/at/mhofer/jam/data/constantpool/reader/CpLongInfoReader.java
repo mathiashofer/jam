@@ -9,7 +9,7 @@ public class CpLongInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpLongInfo readInfo(DataInputStream in) throws IOException
+	public CpLongInfo readData(DataInputStream in) throws IOException
 	{
 		long bytes = in.readLong();
 		return new CpLongInfo(bytes);

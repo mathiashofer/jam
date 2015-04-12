@@ -9,7 +9,7 @@ public class CpMethodTypeInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpMethodTypeInfo readInfo(DataInputStream in) throws IOException
+	public CpMethodTypeInfo readData(DataInputStream in) throws IOException
 	{
 		int descriptorIndex = in.readUnsignedShort();
 		return new CpMethodTypeInfo(descriptorIndex);

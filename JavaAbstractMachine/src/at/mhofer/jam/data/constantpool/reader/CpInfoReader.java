@@ -1,13 +1,16 @@
 package at.mhofer.jam.data.constantpool.reader;
 
-import java.io.DataInputStream;
-import java.io.IOException;
-
+import at.mhofer.jam.data.DataReader;
 import at.mhofer.jam.data.constantpool.CpInfo;
 
-public interface CpInfoReader
+/**
+ * Marker Interface
+ * 
+ * @author Mathias
+ *
+ */
+public interface CpInfoReader extends DataReader<CpInfo>
 {
 	
-	public CpInfo readInfo(DataInputStream in) throws IOException;
 
 }

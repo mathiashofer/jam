@@ -13,6 +13,7 @@ import at.mhofer.jam.data.constantpool.CpTag;
 import at.mhofer.jam.data.constantpool.reader.CpInfoReader;
 import at.mhofer.jam.data.constantpool.reader.ReaderRegistry;
 import at.mhofer.jam.data.fields.FieldInfo;
+import at.mhofer.jam.data.fields.FieldInfoReader;
 
 /**
  * Represents the class file in memory
@@ -57,14 +58,18 @@ public class ClassFile
 			byte tagCode = in.readByte();
 			CpTag tag = CpTag.fromValue(tagCode);
 			CpInfoReader reader = ReaderRegistry.getReader(tag);
-			CpInfo info = reader.readInfo(in);
+			CpInfo info = reader.readData(in);
 			constant_pool[i] = info;
 		}
 		
 		// Read fields
+		FieldInfoReader fieldReader = new FieldInfoReader();
 		this.fields_count = in.readUnsignedShort();
 		this.fields = new FieldInfo[fields_count];
-		
+		for (int i = 0; i < fields_count; i++)
+		{
+			fields[i] = fieldReader.readData(in);
+		}
 		
 	}
 
@@ -73,7 +78,9 @@ public class ClassFile
 	{
 		return "ClassFile [magic=" + magic + ", minor_version=" + minor_version
 				+ ", major_version=" + major_version + ", constant_pool_count="
-				+ constant_pool_count + ", constant_pool=" + Arrays.toString(constant_pool) + "]";
+				+ constant_pool_count + ", constant_pool=" + Arrays.toString(constant_pool)
+				+ ", fields_count=" + fields_count + ", fields=" + Arrays.toString(fields) + "]";
 	}
+
 
 }

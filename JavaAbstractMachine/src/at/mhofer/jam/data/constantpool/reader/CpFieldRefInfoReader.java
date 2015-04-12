@@ -9,7 +9,7 @@ public class CpFieldRefInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpFieldrefInfo readInfo(DataInputStream in) throws IOException
+	public CpFieldrefInfo readData(DataInputStream in) throws IOException
 	{
 		int classIndex = in.readUnsignedShort();
 		int nameAndTypeIndex = in.readUnsignedShort();

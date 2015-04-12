@@ -9,7 +9,7 @@ public class CpNameAndTypeInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpNameAndTypeInfo readInfo(DataInputStream in) throws IOException
+	public CpNameAndTypeInfo readData(DataInputStream in) throws IOException
 	{
 		int nameIndex = in.readUnsignedShort();
 		int descriptorIndex = in.readUnsignedShort();
