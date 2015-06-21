@@ -1,4 +1,4 @@
-package at.mhofer.jam.data.fields;
+package at.mhofer.jam.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ public enum AccessFlag
 		}
 	}
 	
-	AccessFlag(int value) { this.value = value; }
+	private AccessFlag(int value) { this.value = value; }
 		
 	public int value() { return value; }
 	

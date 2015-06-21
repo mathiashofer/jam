@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.attributes;
 
-public class AttributeInfo
+public abstract class AttributeInfo
 {
 
 	/**
@@ -17,16 +17,13 @@ public class AttributeInfo
 	 * six bytes that contain the attribute_name_index and attribute_length
 	 * items.
 	 */
-	private int attributeLength;
+	private long attributeLength;
 
-	private byte[] info;
-
-	public AttributeInfo(int attributeNameIndex, int attributeLength, byte[] info)
+	public AttributeInfo(int attributeNameIndex, long attributeLength)
 	{
 		super();
 		this.attributeNameIndex = attributeNameIndex;
 		this.attributeLength = attributeLength;
-		this.info = info;
 	}
 
 	public int getAttributeNameIndex()
@@ -39,24 +36,13 @@ public class AttributeInfo
 		this.attributeNameIndex = attributeNameIndex;
 	}
 
-	public int getAttributeLength()
+	public long getAttributeLength()
 	{
 		return attributeLength;
 	}
 
-	public void setAttributeLength(int attributeLength)
+	public void setAttributeLength(long attributeLength)
 	{
 		this.attributeLength = attributeLength;
 	}
-
-	public byte[] getInfo()
-	{
-		return info;
-	}
-
-	public void setInfo(byte[] info)
-	{
-		this.info = info;
-	}
-	
 }

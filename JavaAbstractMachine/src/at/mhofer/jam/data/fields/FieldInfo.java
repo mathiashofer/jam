@@ -2,6 +2,7 @@ package at.mhofer.jam.data.fields;
 
 import java.util.HashSet;
 
+import at.mhofer.jam.data.AccessFlag;
 import at.mhofer.jam.data.attributes.AttributeInfo;
 
 public class FieldInfo
