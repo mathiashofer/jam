@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.attributes;
 
-public class ClassInfo
+public class ClassesTableEntry
 {
 	/**
 	 * The value of the inner_class_info_index item must be a valid index into
@@ -44,7 +44,7 @@ public class ClassInfo
 	 */
 	private int innerClassAccessFlags;
 
-	public ClassInfo(int innerClassInfoIndex, int outerClassInfoIndex, int innerNameIndex,
+	public ClassesTableEntry(int innerClassInfoIndex, int outerClassInfoIndex, int innerNameIndex,
 			int innerClassAccessFlags)
 	{
 		super();

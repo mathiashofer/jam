@@ -1,7 +1,7 @@
 package at.mhofer.jam.data.constantpool;
 
 
-public class CpUTF8Info implements CpInfo
+public class UTF8InfoConstant implements ConstantPoolInfo
 {
 
 	/**
@@ -24,16 +24,16 @@ public class CpUTF8Info implements CpInfo
 	 */
 	private byte[] bytes;
 	
-	public CpUTF8Info(byte[] bytes)
+	public UTF8InfoConstant(byte[] bytes)
 	{
 		this.length = bytes.length;
 		this.bytes = bytes;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.UTF8;
+		return ConstantPoolTag.UTF8;
 	}
 
 	public int getLength()

@@ -13,14 +13,14 @@ public class CodeAttribute extends AttributeInfo
 	
 	private int exceptionTableLength;
 	
-	private ExceptionInfo[] exceptionTable;
+	private ExceptionIndexTableEntry[] exceptionTable;
 	
 	private int attributesCount;
 	
 	private AttributeInfo[] attributes;
 
 	public CodeAttribute(int attributeNameIndex, long attributeLength, int maxStack, int maxLocals,
-			long codeLength, byte[] code, int exceptionTableLength, ExceptionInfo[] exceptionTable,
+			long codeLength, byte[] code, int exceptionTableLength, ExceptionIndexTableEntry[] exceptionTable,
 			int attributesCount, AttributeInfo[] attributes)
 	{
 		super(attributeNameIndex, attributeLength);
@@ -59,7 +59,7 @@ public class CodeAttribute extends AttributeInfo
 		return exceptionTableLength;
 	}
 
-	public ExceptionInfo[] getExceptionTable()
+	public ExceptionIndexTableEntry[] getExceptionTable()
 	{
 		return exceptionTable;
 	}

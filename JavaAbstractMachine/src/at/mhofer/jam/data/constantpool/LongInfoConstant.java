@@ -7,20 +7,20 @@ package at.mhofer.jam.data.constantpool;
  * @author Mathias
  *
  */
-public class CpLongInfo implements CpInfo
+public class LongInfoConstant implements ConstantPoolInfo
 {
 
 	private long bytes;
 
-	public CpLongInfo(long bytes)
+	public LongInfoConstant(long bytes)
 	{
 		this.bytes = bytes;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.LONG;
+		return ConstantPoolTag.LONG;
 	}
 	
 	public long getBytes()

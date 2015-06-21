@@ -13,10 +13,10 @@ public class InnerClassesAttribute extends AttributeInfo
 	 * represents a class or interface C that is not a package member must have
 	 * exactly one corresponding entry in the classes array.
 	 */
-	private ClassInfo[] classes;
+	private ClassesTableEntry[] classes;
 
 	public InnerClassesAttribute(int attributeNameIndex, long attributeLength, int numberOfClasses,
-			ClassInfo[] classes)
+			ClassesTableEntry[] classes)
 	{
 		super(attributeNameIndex, attributeLength);
 		this.numberOfClasses = numberOfClasses;
@@ -28,7 +28,7 @@ public class InnerClassesAttribute extends AttributeInfo
 		return numberOfClasses;
 	}
 
-	public ClassInfo[] getClasses()
+	public ClassesTableEntry[] getClasses()
 	{
 		return classes;
 	}

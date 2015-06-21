@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
-public class CpIntegerInfo implements CpInfo
+public class IntegerInfoConstant implements ConstantPoolInfo
 {
 	
 	/**
@@ -10,15 +10,15 @@ public class CpIntegerInfo implements CpInfo
 	 */
 	private int bytes;
 
-	public CpIntegerInfo(int bytes)
+	public IntegerInfoConstant(int bytes)
 	{
 		this.bytes = bytes;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.INTEGER;
+		return ConstantPoolTag.INTEGER;
 	}
 
 	public int getBytes()

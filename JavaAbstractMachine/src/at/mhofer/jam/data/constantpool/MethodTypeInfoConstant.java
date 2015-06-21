@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
-public class CpMethodTypeInfo implements CpInfo
+public class MethodTypeInfoConstant implements ConstantPoolInfo
 {
 
 	/**
@@ -11,15 +11,15 @@ public class CpMethodTypeInfo implements CpInfo
 	 */
 	private int descriptorIndex;
 
-	public CpMethodTypeInfo(int descriptorIndex)
+	public MethodTypeInfoConstant(int descriptorIndex)
 	{
 		this.descriptorIndex = descriptorIndex;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.METHOD_TYPE;
+		return ConstantPoolTag.METHOD_TYPE;
 	}
 
 	public int getDescriptorIndex()

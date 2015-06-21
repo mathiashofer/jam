@@ -1,5 +1,7 @@
 package at.mhofer.jam.data.attributes;
 
+import at.mhofer.jam.data.U4Array;
+
 public class SourceDebugExtensionAttribute extends AttributeInfo
 {
 	/**
@@ -8,16 +10,16 @@ public class SourceDebugExtensionAttribute extends AttributeInfo
 	 * represented using a modified UTF-8 string (§4.4.7) with no terminating
 	 * zero byte.
 	 */
-	private byte[] debugExtension;
+	private U4Array<Byte> debugExtension;
 
 	public SourceDebugExtensionAttribute(int attributeNameIndex, long attributeLength,
-			byte[] debugExtension)
+			U4Array<Byte> debugExtension)
 	{
 		super(attributeNameIndex, attributeLength);
 		this.debugExtension = debugExtension;
 	}
 
-	public byte[] getDebugExtension()
+	public U4Array<Byte> getDebugExtension()
 	{
 		return debugExtension;
 	}

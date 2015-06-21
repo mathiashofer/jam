@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.attributes;
 
-public class ExceptionInfo
+public class ExceptionIndexTableEntry
 {
 	/**
 	 * The values of the two items start_pc and end_pc indicate the ranges in
@@ -47,7 +47,7 @@ public class ExceptionInfo
 	 */
 	private int catchType;
 
-	public ExceptionInfo(int startPC, int endPC, int handlerPC, int catchType)
+	public ExceptionIndexTableEntry(int startPC, int endPC, int handlerPC, int catchType)
 	{
 		this.startPC = startPC;
 		this.endPC = endPC;

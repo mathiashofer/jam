@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
-public class CpStringInfo implements CpInfo
+public class StringInfoConstant implements ConstantPoolInfo
 {
 
 	/**
@@ -11,15 +11,15 @@ public class CpStringInfo implements CpInfo
 	 */
 	private int stringIndex;
 
-	public CpStringInfo(int stringIndex)
+	public StringInfoConstant(int stringIndex)
 	{
 		this.stringIndex = stringIndex;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.STRING;
+		return ConstantPoolTag.STRING;
 	}
 
 	public int getStringIndex()

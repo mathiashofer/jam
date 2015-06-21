@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
-public class CpFieldrefInfo implements CpInfo
+public class FieldrefInfoConstant implements ConstantPoolInfo
 {
 
 	/**
@@ -25,16 +25,16 @@ public class CpFieldrefInfo implements CpInfo
 	 */
 	private int nameAndTypeIndex;
 
-	public CpFieldrefInfo(int classIndex, int nameAndTypeIndex)
+	public FieldrefInfoConstant(int classIndex, int nameAndTypeIndex)
 	{
 		this.classIndex = classIndex;
 		this.nameAndTypeIndex = nameAndTypeIndex;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.FIELDREF;
+		return ConstantPoolTag.FIELDREF;
 	}
 
 	public int getClassIndex()

@@ -9,8 +9,8 @@ import java.io.InputStream;
 import java.util.Arrays;
 
 import at.mhofer.jam.data.attributes.AttributeInfo;
-import at.mhofer.jam.data.constantpool.CpInfo;
-import at.mhofer.jam.data.constantpool.CpTag;
+import at.mhofer.jam.data.constantpool.ConstantPoolInfo;
+import at.mhofer.jam.data.constantpool.ConstantPoolTag;
 import at.mhofer.jam.data.constantpool.reader.CpInfoReader;
 import at.mhofer.jam.data.fields.FieldInfo;
 import at.mhofer.jam.data.fields.FieldInfoReader;
@@ -63,7 +63,7 @@ public class ClassFile
 	 * 
 	 * The constant_pool table is indexed from 1 to constant_pool_count - 1.
 	 */
-	private CpInfo[] constant_pool;
+	private ConstantPoolInfo[] constant_pool;
 
 	/**
 	 * The value of the access_flags item is a mask of flags used to denote
@@ -190,13 +190,13 @@ public class ClassFile
 
 		// Read constant pool
 		this.constant_pool_count = in.readUnsignedShort();
-		this.constant_pool = new CpInfo[constant_pool_count]; //constant_pool_count - 1 elements
+		this.constant_pool = new ConstantPoolInfo[constant_pool_count]; //constant_pool_count - 1 elements
 		for (int i = 1; i < constant_pool_count; i++)
 		{
 			byte tagCode = in.readByte();
-			CpTag tag = CpTag.fromValue(tagCode);
+			ConstantPoolTag tag = ConstantPoolTag.fromValue(tagCode);
 			CpInfoReader reader = ReaderRegistry.getReader(tag);
-			CpInfo info = reader.readData(in);
+			ConstantPoolInfo info = reader.readData(in);
 			constant_pool[i] = info;
 		}
 

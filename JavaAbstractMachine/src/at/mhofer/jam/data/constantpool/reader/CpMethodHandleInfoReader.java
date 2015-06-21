@@ -3,13 +3,13 @@ package at.mhofer.jam.data.constantpool.reader;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import at.mhofer.jam.data.constantpool.CpMethodHandleInfo;
+import at.mhofer.jam.data.constantpool.MethodHandleInfoConstant;
 
 public class CpMethodHandleInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpMethodHandleInfo readData(DataInputStream in) throws IOException
+	public MethodHandleInfoConstant readData(DataInputStream in) throws IOException
 	{
 		/**
 		 * readByte() ist used instead of readUnsignedByte(), because
@@ -18,7 +18,7 @@ public class CpMethodHandleInfoReader implements CpInfoReader
 		byte referenceKind = in.readByte();
 		
 		int referenceIndex = in.readUnsignedShort();
-		return new CpMethodHandleInfo(referenceKind, referenceIndex);
+		return new MethodHandleInfoConstant(referenceKind, referenceIndex);
 	}
 
 }

@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
-public class CpMethodHandleInfo implements CpInfo
+public class MethodHandleInfoConstant implements ConstantPoolInfo
 {
 
 	/**
@@ -51,16 +51,16 @@ public class CpMethodHandleInfo implements CpInfo
 	 */
 	private int referenceIndex;
 
-	public CpMethodHandleInfo(byte referenceKind, int referenceIndex)
+	public MethodHandleInfoConstant(byte referenceKind, int referenceIndex)
 	{
 		this.referenceKind = referenceKind;
 		this.referenceIndex = referenceIndex;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.METHOD_HANDLE;
+		return ConstantPoolTag.METHOD_HANDLE;
 	}
 
 	public byte getReferenceKind()

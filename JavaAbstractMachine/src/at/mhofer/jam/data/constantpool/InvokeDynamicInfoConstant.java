@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
-public class CpInvokeDynamicInfo implements CpInfo
+public class InvokeDynamicInfoConstant implements ConstantPoolInfo
 {
 
 	/**
@@ -18,16 +18,16 @@ public class CpInvokeDynamicInfo implements CpInfo
 	 */
 	private int nameAndTypeIndex;
 
-	public CpInvokeDynamicInfo(int bootstrapMethodAttrIndex, int nameAndTypeIndex)
+	public InvokeDynamicInfoConstant(int bootstrapMethodAttrIndex, int nameAndTypeIndex)
 	{
 		this.bootstrapMethodAttrIndex = bootstrapMethodAttrIndex;
 		this.nameAndTypeIndex = nameAndTypeIndex;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.INVOKE_DYNAMIC;
+		return ConstantPoolTag.INVOKE_DYNAMIC;
 	}
 
 	public int getBootstrapMethodAttrIndex()

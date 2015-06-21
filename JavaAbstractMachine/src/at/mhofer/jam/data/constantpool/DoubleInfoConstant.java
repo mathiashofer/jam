@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
-public class CpDoubleInfo implements CpInfo
+public class DoubleInfoConstant implements ConstantPoolInfo
 {
 
 	/**
@@ -8,15 +8,15 @@ public class CpDoubleInfo implements CpInfo
 	 */
 	private double bytes;
 	
-	public CpDoubleInfo(double bytes)
+	public DoubleInfoConstant(double bytes)
 	{
 		this.bytes = bytes;
 	}
 	
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.DOUBLE;
+		return ConstantPoolTag.DOUBLE;
 	}
 	
 	public double getBytes()

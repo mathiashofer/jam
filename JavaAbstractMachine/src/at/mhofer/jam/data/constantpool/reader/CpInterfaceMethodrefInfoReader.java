@@ -3,17 +3,17 @@ package at.mhofer.jam.data.constantpool.reader;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-import at.mhofer.jam.data.constantpool.CpInterfaceMethodrefInfo;
+import at.mhofer.jam.data.constantpool.InterfaceMethodrefInfoConstant;
 
 public class CpInterfaceMethodrefInfoReader implements CpInfoReader
 {
 
 	@Override
-	public CpInterfaceMethodrefInfo readData(DataInputStream in) throws IOException
+	public InterfaceMethodrefInfoConstant readData(DataInputStream in) throws IOException
 	{
 		int classIndex = in.readUnsignedShort();
 		int nameAndTypeIndex = in.readUnsignedShort();
-		return new CpInterfaceMethodrefInfo(classIndex, nameAndTypeIndex);
+		return new InterfaceMethodrefInfoConstant(classIndex, nameAndTypeIndex);
 	}
 
 }

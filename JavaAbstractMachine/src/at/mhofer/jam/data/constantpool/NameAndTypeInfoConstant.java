@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
-public class CpNameAndTypeInfo implements CpInfo
+public class NameAndTypeInfoConstant implements ConstantPoolInfo
 {
 
 	/**
@@ -20,16 +20,16 @@ public class CpNameAndTypeInfo implements CpInfo
 	 */
 	private int descriptorIndex;
 
-	public CpNameAndTypeInfo(int nameIndex, int descriptorIndex)
+	public NameAndTypeInfoConstant(int nameIndex, int descriptorIndex)
 	{
 		this.nameIndex = nameIndex;
 		this.descriptorIndex = descriptorIndex;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.NAME_AND_TYPE;
+		return ConstantPoolTag.NAME_AND_TYPE;
 	}
 
 	public int getNameIndex()

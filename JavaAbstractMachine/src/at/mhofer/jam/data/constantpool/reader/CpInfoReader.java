@@ -1,7 +1,7 @@
 package at.mhofer.jam.data.constantpool.reader;
 
 import at.mhofer.jam.data.DataReader;
-import at.mhofer.jam.data.constantpool.CpInfo;
+import at.mhofer.jam.data.constantpool.ConstantPoolInfo;
 
 /**
  * Marker Interface
@@ -9,7 +9,7 @@ import at.mhofer.jam.data.constantpool.CpInfo;
  * @author Mathias
  *
  */
-public interface CpInfoReader extends DataReader<CpInfo>
+public interface CpInfoReader extends DataReader<ConstantPoolInfo>
 {
 	
 

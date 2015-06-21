@@ -9,7 +9,7 @@ import java.util.Map;
  * @author Mathias
  *
  */
-public enum CpTag
+public enum ConstantPoolTag
 {
 	
 	CLASS(7),
@@ -29,21 +29,21 @@ public enum CpTag
 	
 	private final int value;
 	
-	private static final Map<Integer, CpTag> TAG_MAP = new HashMap<Integer, CpTag>();
+	private static final Map<Integer, ConstantPoolTag> TAG_MAP = new HashMap<Integer, ConstantPoolTag>();
 	
 	static
 	{
-		for (CpTag tag : CpTag.values())
+		for (ConstantPoolTag tag : ConstantPoolTag.values())
 		{
 			TAG_MAP.put(tag.value, tag);
 		}
 	}
 	
-	CpTag(int value) { this.value = value; }
+	ConstantPoolTag(int value) { this.value = value; }
 		
 	public int value() { return value; }
 	
-	public static CpTag fromValue(int value)
+	public static ConstantPoolTag fromValue(int value)
 	{
 		return TAG_MAP.get(value);
 	}

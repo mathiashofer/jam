@@ -7,7 +7,7 @@ package at.mhofer.jam.data.constantpool;
  * @author Mathias
  *
  */
-public class CpClassInfo implements CpInfo
+public class ClassInfoConstant implements ConstantPoolInfo
 {
 
 	/**
@@ -18,15 +18,15 @@ public class CpClassInfo implements CpInfo
 	 */
 	private int nameIndex;
 
-	public CpClassInfo(int nameIndex)
+	public ClassInfoConstant(int nameIndex)
 	{
 		this.nameIndex = nameIndex;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.CLASS;
+		return ConstantPoolTag.CLASS;
 	}
 
 	public int getNameIndex()

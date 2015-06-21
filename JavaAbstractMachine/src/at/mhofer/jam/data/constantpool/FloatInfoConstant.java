@@ -1,6 +1,6 @@
 package at.mhofer.jam.data.constantpool;
 
-public class CpFloatInfo implements CpInfo
+public class FloatInfoConstant implements ConstantPoolInfo
 {
 	/**
 	 * The bytes item of the CONSTANT_Float_info structure represents the value
@@ -25,15 +25,15 @@ public class CpFloatInfo implements CpInfo
 	 */
 	private float bytes;
 
-	public CpFloatInfo(float bytes)
+	public FloatInfoConstant(float bytes)
 	{
 		this.bytes = bytes;
 	}
 
 	@Override
-	public CpTag getTag()
+	public ConstantPoolTag getTag()
 	{
-		return CpTag.FLOAT;
+		return ConstantPoolTag.FLOAT;
 	}
 
 	public float getBytes()
