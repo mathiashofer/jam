@@ -46,6 +46,7 @@ public class AttributeInfoReader implements DataReader<AttributeInfo>
 		strategies.put("LineNumberTable", new LineNumberTableStrategy());
 		strategies.put("LocalVariableTable", new LocalVariableTableStrategy());
 		strategies.put("StackMapTable", new StackMapTableStrategy());
+		strategies.put("SourceFile", new SourceFileStrategy());
 	}
 
 	private ConstantPoolInfo[] constantPool;

@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import at.mhofer.jam.data.attributes.AttributeInfo;
+import at.mhofer.jam.data.attributes.reader.AttributeInfoReader;
 import at.mhofer.jam.data.constantpool.ConstantPoolInfo;
 import at.mhofer.jam.data.constantpool.ConstantPoolTag;
 import at.mhofer.jam.data.constantpool.reader.ConstantPoolInfoReader;
@@ -240,11 +241,12 @@ public class ClassFile
 		}
 		
 		// Read attributes
+		AttributeInfoReader attributeReader = new AttributeInfoReader(constantPool);
 		this.attributesCount = in.readUnsignedShort();
 		this.attributes = new AttributeInfo[attributesCount];
 		for (int i = 0; i < attributesCount; i++)
 		{
-			
+			attributes[i] = attributeReader.readData(in);
 		}
 	}
 
