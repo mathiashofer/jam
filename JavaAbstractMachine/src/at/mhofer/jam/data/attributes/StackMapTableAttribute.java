@@ -1,5 +1,7 @@
 package at.mhofer.jam.data.attributes;
 
+import at.mhofer.jam.data.attributes.stack.StackMapFrame;
+
 public class StackMapTableAttribute extends AttributeInfo
 {
 	/**
