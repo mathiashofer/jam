@@ -24,10 +24,13 @@ public class UTF8InfoConstant implements ConstantPoolInfo
 	 */
 	private byte[] bytes;
 	
+	private String value;
+	
 	public UTF8InfoConstant(byte[] bytes)
 	{
 		this.length = bytes.length;
 		this.bytes = bytes;
+		this.value = new String(bytes);
 	}
 
 	@Override
@@ -46,6 +49,11 @@ public class UTF8InfoConstant implements ConstantPoolInfo
 		return bytes;
 	}
 
+	public String getValue()
+	{
+		return value;
+	}
+	
 	@Override
 	public String toString()
 	{

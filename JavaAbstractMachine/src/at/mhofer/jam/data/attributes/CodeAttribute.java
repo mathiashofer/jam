@@ -1,5 +1,7 @@
 package at.mhofer.jam.data.attributes;
 
+import at.mhofer.jam.data.U4Array;
+
 public class CodeAttribute extends AttributeInfo
 {
 	private int maxStack;
@@ -8,8 +10,7 @@ public class CodeAttribute extends AttributeInfo
 	
 	private long codeLength;
 	
-	//TODO: change to U4Array
-	private byte[] code;
+	private U4Array<Byte> code;
 	
 	private int exceptionTableLength;
 	
@@ -20,7 +21,7 @@ public class CodeAttribute extends AttributeInfo
 	private AttributeInfo[] attributes;
 
 	public CodeAttribute(int attributeNameIndex, long attributeLength, int maxStack, int maxLocals,
-			long codeLength, byte[] code, int exceptionTableLength, ExceptionIndexTableEntry[] exceptionTable,
+			long codeLength, U4Array<Byte> code, int exceptionTableLength, ExceptionIndexTableEntry[] exceptionTable,
 			int attributesCount, AttributeInfo[] attributes)
 	{
 		super(attributeNameIndex, attributeLength);
@@ -49,7 +50,7 @@ public class CodeAttribute extends AttributeInfo
 		return codeLength;
 	}
 
-	public byte[] getCode()
+	public U4Array<Byte> getCode()
 	{
 		return code;
 	}

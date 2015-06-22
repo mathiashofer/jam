@@ -1,4 +1,4 @@
-package at.mhofer.jam.data.fields;
+package at.mhofer.jam.data.methods;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -9,23 +9,23 @@ import at.mhofer.jam.data.attributes.AttributeInfo;
 import at.mhofer.jam.data.attributes.reader.AttributeInfoReader;
 import at.mhofer.jam.data.constantpool.ConstantPoolInfo;
 
-public class FieldInfoReader implements DataReader<FieldInfo>
-{	
+public class MethodInfoReader implements DataReader<MethodInfo>
+{
 	private AttributeInfoReader reader;
 	
-	public FieldInfoReader(ConstantPoolInfo[] constantPool)
+	public MethodInfoReader(ConstantPoolInfo[] constantPool)
 	{
 		this.reader = new AttributeInfoReader(constantPool);
 	}	
 
 	@Override
-	public FieldInfo readData(DataInputStream in) throws IOException
+	public MethodInfo readData(DataInputStream in) throws IOException
 	{
 		short flagBytes = in.readShort();
 		AccessFlag[] accessFlags = AccessFlag.fromBytes(flagBytes);
 		int nameIndex = in.readUnsignedShort();
 		int descriptorIndex = in.readUnsignedShort();
-		short attributesCount = in.readShort();
+		int attributesCount = in.readUnsignedShort();
 		AttributeInfo[] attributes = new AttributeInfo[attributesCount];
 		for (int i = 0; i < attributesCount; i++)
 		{
@@ -33,9 +33,7 @@ public class FieldInfoReader implements DataReader<FieldInfo>
 			attributes[i] = attribute;
 		}
 		
-		return new FieldInfo(accessFlags, nameIndex, descriptorIndex, attributesCount, attributes);
+		return new MethodInfo(accessFlags, nameIndex, descriptorIndex, attributesCount, attributes);
 	}
 
-	
-	
 }

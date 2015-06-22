@@ -7,14 +7,16 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import at.mhofer.jam.data.attributes.AttributeInfo;
 import at.mhofer.jam.data.constantpool.ConstantPoolInfo;
 import at.mhofer.jam.data.constantpool.ConstantPoolTag;
-import at.mhofer.jam.data.constantpool.reader.CpInfoReader;
+import at.mhofer.jam.data.constantpool.reader.ConstantPoolInfoReader;
 import at.mhofer.jam.data.fields.FieldInfo;
 import at.mhofer.jam.data.fields.FieldInfoReader;
 import at.mhofer.jam.data.methods.MethodInfo;
+import at.mhofer.jam.data.methods.MethodInfoReader;
 
 /**
  * Represents a class file as specified in the JVM8 Spec.
@@ -38,12 +40,12 @@ public class ClassFile
 	 * version of its class file format as M.m. Thus, class file format versions
 	 * may be ordered lexicographically, for example, 1.5 < 2.0 < 2.1.
 	 */
-	private int minor_version;
+	private int minorVersion;
 
 	/**
-	 * See minor_version
+	 * See minorVersion
 	 */
-	private int major_version;
+	private int majorVersion;
 
 	/**
 	 * The value of the constant_pool_count item is equal to the number of
@@ -52,7 +54,7 @@ public class ClassFile
 	 * constant_pool_count, with the exception for constants of type long and
 	 * double noted in §4.4.5.
 	 */
-	private int constant_pool_count;
+	private int constantPoolCount;
 
 	/**
 	 * The constant_pool is a table of structures (§4.4) representing various
@@ -63,14 +65,14 @@ public class ClassFile
 	 * 
 	 * The constant_pool table is indexed from 1 to constant_pool_count - 1.
 	 */
-	private ConstantPoolInfo[] constant_pool;
+	private ConstantPoolInfo[] constantPool;
 
 	/**
 	 * The value of the access_flags item is a mask of flags used to denote
 	 * access permissions to and properties of this class or interface. The
 	 * interpretation of each flag, when set, is specified in Table 4.1-A.
 	 */
-	private AccessFlag[] access_flags;
+	private HashSet<AccessFlag> accessFlags;
 
 	/**
 	 * The value of the this_class item must be a valid index into the
@@ -78,7 +80,7 @@ public class ClassFile
 	 * CONSTANT_Class_info structure (§4.4.1) representing the class or
 	 * interface defined by this class file.
 	 */
-	private int this_class;
+	private int thisClass;
 
 	/**
 	 * For a class, the value of the super_class item either must be zero or
@@ -98,13 +100,13 @@ public class ClassFile
 	 * index must be a CONSTANT_Class_info structure representing the class
 	 * Object.
 	 */
-	private int super_class;
+	private int superClass;
 
 	/**
 	 * The value of the interfaces_count item gives the number of direct
 	 * superinterfaces of this class or interface type.
 	 */
-	private int interfaces_count;
+	private int interfacesCount;
 
 	/**
 	 * Each value in the interfaces array must be a valid index into the
@@ -122,7 +124,7 @@ public class ClassFile
 	 * fields, both class variables and instance variables, declared by this
 	 * class or interface type.
 	 */
-	private int fields_count;
+	private int fieldsCount;
 
 	/**
 	 * Each value in the fields table must be a field_info structure (§4.5)
@@ -137,7 +139,7 @@ public class ClassFile
 	 * The value of the methods_count item gives the number of method_info
 	 * structures in the methods table.
 	 */
-	private int methods_count;
+	private int methodsCount;
 
 	/**
 	 * Each value in the methods table must be a method_info structure (§4.6)
@@ -158,7 +160,7 @@ public class ClassFile
 	 * The value of the attributes_count item gives the number of attributes in
 	 * the attributes table of this class.
 	 */
-	private int attributes_count;
+	private int attributesCount;
 
 	/**
 	 * Each value of the attributes table must be an attribute_info structure
@@ -185,54 +187,62 @@ public class ClassFile
 		DataInputStream in = new DataInputStream(new BufferedInputStream(clazz));
 
 		this.magic = in.readInt();
-		this.minor_version = in.readUnsignedShort();
-		this.major_version = in.readUnsignedShort();
+		this.minorVersion = in.readUnsignedShort();
+		this.majorVersion = in.readUnsignedShort();
 
 		// Read constant pool
-		this.constant_pool_count = in.readUnsignedShort();
-		this.constant_pool = new ConstantPoolInfo[constant_pool_count]; //constant_pool_count - 1 elements
-		for (int i = 1; i < constant_pool_count; i++)
+		this.constantPoolCount = in.readUnsignedShort();
+		this.constantPool = new ConstantPoolInfo[constantPoolCount]; //constant_pool_count - 1 elements
+		for (int i = 1; i < constantPoolCount; i++)
 		{
 			byte tagCode = in.readByte();
 			ConstantPoolTag tag = ConstantPoolTag.fromValue(tagCode);
-			CpInfoReader reader = ReaderRegistry.getReader(tag);
+			ConstantPoolInfoReader reader = ReaderRegistry.getConstantPoolReader(tag);
 			ConstantPoolInfo info = reader.readData(in);
-			constant_pool[i] = info;
+			constantPool[i] = info;
 		}
 
-		this.access_flags = AccessFlag.fromBytes(in.readUnsignedShort());
-		this.this_class = in.readUnsignedShort();
-		this.super_class = in.readUnsignedShort();
+		// add the flags to a hashset, because of constant time "contains" check
+		AccessFlag[] flags = AccessFlag.fromBytes(in.readUnsignedShort());
+		this.accessFlags = new HashSet<AccessFlag>();
+		for (AccessFlag flag : flags)
+		{
+			this.accessFlags.add(flag);
+		}
+		
+		this.thisClass = in.readUnsignedShort();
+		this.superClass = in.readUnsignedShort();
 
 		// Read interfaces
-		this.interfaces_count = in.readUnsignedShort();
-		this.interfaces = new int[interfaces_count];
-		for (int i = 0; i < interfaces_count; i++)
+		this.interfacesCount = in.readUnsignedShort();
+		this.interfaces = new int[interfacesCount];
+		for (int i = 0; i < interfacesCount; i++)
 		{
 			this.interfaces[i] = in.readUnsignedShort();
 		}
 
 		// Read fields
-		FieldInfoReader fieldReader = new FieldInfoReader();
-		this.fields_count = in.readUnsignedShort();
-		this.fields = new FieldInfo[fields_count];
-		for (int i = 0; i < fields_count; i++)
+		FieldInfoReader fieldReader = new FieldInfoReader(constantPool);
+		this.fieldsCount = in.readUnsignedShort();
+		this.fields = new FieldInfo[fieldsCount];
+		for (int i = 0; i < fieldsCount; i++)
 		{
 			fields[i] = fieldReader.readData(in);
 		}
 		
 		// Read methods
-		this.methods_count = in.readUnsignedShort();
-		this.methods = new MethodInfo[methods_count];
-		for (int i = 0; i < methods_count; i++)
+		MethodInfoReader methodReader = new MethodInfoReader(constantPool);
+		this.methodsCount = in.readUnsignedShort();
+		this.methods = new MethodInfo[methodsCount];
+		for (int i = 0; i < methodsCount; i++)
 		{
-			
+			methods[i] = methodReader.readData(in);
 		}
 		
 		// Read attributes
-		this.attributes_count = in.readUnsignedShort();
-		this.attributes = new AttributeInfo[attributes_count];
-		for (int i = 0; i < attributes_count; i++)
+		this.attributesCount = in.readUnsignedShort();
+		this.attributes = new AttributeInfo[attributesCount];
+		for (int i = 0; i < attributesCount; i++)
 		{
 			
 		}
@@ -241,16 +251,16 @@ public class ClassFile
 	@Override
 	public String toString()
 	{
-		return "ClassFile [magic=" + magic + ", minor_version=" + minor_version
-				+ ", major_version=" + major_version + ", constant_pool_count="
-				+ constant_pool_count + ", constant_pool=" + Arrays.toString(constant_pool)
-				+ ", access_flags=" + Arrays.toString(access_flags) + ", this_class=" + this_class
-				+ ", super_class=" + super_class + ", interfaces_count=" + interfaces_count
-				+ ", interfaces=" + Arrays.toString(interfaces) + ", fields_count=" + fields_count
-				+ ", fields=" + Arrays.toString(fields) + ", methods_count=" + methods_count
-				+ ", methods=" + Arrays.toString(methods) + ", attributes_count="
-				+ attributes_count + ", attributes=" + Arrays.toString(attributes) + "]";
+		return "ClassFile [magic=" + magic + ", minorVersion=" + minorVersion + ", majorVersion="
+				+ majorVersion + ", constantPoolCount=" + constantPoolCount + ", constantPool="
+				+ Arrays.toString(constantPool) + ", accessFlags=" + accessFlags + ", thisClass="
+				+ thisClass + ", superClass=" + superClass + ", interfacesCount=" + interfacesCount
+				+ ", interfaces=" + Arrays.toString(interfaces) + ", fieldsCount=" + fieldsCount
+				+ ", fields=" + Arrays.toString(fields) + ", methodsCount=" + methodsCount
+				+ ", methods=" + Arrays.toString(methods) + ", attributesCount=" + attributesCount
+				+ ", attributes=" + Arrays.toString(attributes) + "]";
 	}
+
 
 
 }

@@ -30,7 +30,7 @@ public class U4Array<T> implements Iterable<T>
 
 	/**
 	 * Used for indices between Integer.MAX_VALUE * 2 - 4 (inclusive) and
-	 * Integer.MAX_VALUE * 2 (exclusive).
+	 * Integer.MAX_VALUE * 2 + 2 (exclusive).
 	 */
 	private ArrayList<T> array3;
 
@@ -47,7 +47,7 @@ public class U4Array<T> implements Iterable<T>
 		{
 			throw new IllegalArgumentException("length must not be less than 0");
 		}
-		else if (length > 2 * ((long)Integer.MAX_VALUE + 1))
+		else if (length > 2 * ((long) Integer.MAX_VALUE + 1))
 		{
 			throw new IllegalArgumentException("length must not be bigger than 2^32");
 		}
@@ -61,7 +61,7 @@ public class U4Array<T> implements Iterable<T>
 		{
 			this.array1 = new ArrayList<T>(MAX_ARRAY_LENGTH);
 			this.array2 = new ArrayList<T>(MAX_ARRAY_LENGTH);
-			//max length = 6
+			// max length = 6
 			this.array3 = new ArrayList<T>((int) (length - (2 * MAX_ARRAY_LENGTH)));
 		}
 		else if (length >= MAX_ARRAY_LENGTH)
@@ -94,9 +94,26 @@ public class U4Array<T> implements Iterable<T>
 		}
 		return elem;
 	}
+	
+	public void add(long index, T elem)
+	{
+		if (index < MAX_ARRAY_LENGTH)
+		{
+			this.array1.add((int) index, elem);
+		}
+		else if (index >= ((long) MAX_ARRAY_LENGTH) * 2)
+		{
+			this.array3.add((int) (index - (2 * MAX_ARRAY_LENGTH)), elem);
+		}
+		else if (index >= MAX_ARRAY_LENGTH)
+		{
+			this.array2.add((int) (index - MAX_ARRAY_LENGTH), elem);
+		}
+	}
 
 	/**
-	 * Sets the e
+	 * Replaces the element on the given index, make sure there is some element
+	 * which can be replaced.
 	 * 
 	 * @param index
 	 * @param elem
@@ -109,10 +126,12 @@ public class U4Array<T> implements Iterable<T>
 		}
 		else if (index >= ((long) MAX_ARRAY_LENGTH) * 2)
 		{
+			System.out.println("Set array3: " + (int) (index - (2 * MAX_ARRAY_LENGTH)));
 			this.array3.set((int) (index - (2 * MAX_ARRAY_LENGTH)), elem);
 		}
 		else if (index >= MAX_ARRAY_LENGTH)
 		{
+			System.out.println("Set array2: " + (int) (index - MAX_ARRAY_LENGTH));
 			this.array2.set((int) (index - MAX_ARRAY_LENGTH), elem);
 		}
 	}

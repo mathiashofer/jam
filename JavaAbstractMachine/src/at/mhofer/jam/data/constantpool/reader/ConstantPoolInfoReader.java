@@ -9,7 +9,7 @@ import at.mhofer.jam.data.constantpool.ConstantPoolInfo;
  * @author Mathias
  *
  */
-public interface CpInfoReader extends DataReader<ConstantPoolInfo>
+public interface ConstantPoolInfoReader extends DataReader<ConstantPoolInfo>
 {
 	
 

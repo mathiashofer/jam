@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import at.mhofer.jam.data.constantpool.StringInfoConstant;
 
-public class CpStringInfoReader implements CpInfoReader
+public class StringInfoConstantReader implements ConstantPoolInfoReader
 {
 
 	@Override
