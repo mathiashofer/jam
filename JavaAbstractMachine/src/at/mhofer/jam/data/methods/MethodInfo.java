@@ -1,5 +1,6 @@
 package at.mhofer.jam.data.methods;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 import at.mhofer.jam.data.AccessFlag;
@@ -61,5 +62,13 @@ public class MethodInfo
 	public AttributeInfo[] getAttributes()
 	{
 		return attributes;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "MethodInfo [accessFlags=" + accessFlags + ", nameIndex=" + nameIndex
+				+ ", descriptorIndex=" + descriptorIndex + ", attributesCount=" + attributesCount
+				+ ", attributes=" + Arrays.toString(attributes) + "]";
 	}
 }

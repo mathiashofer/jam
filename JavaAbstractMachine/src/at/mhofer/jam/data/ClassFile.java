@@ -13,6 +13,7 @@ import at.mhofer.jam.data.attributes.AttributeInfo;
 import at.mhofer.jam.data.attributes.reader.AttributeInfoReader;
 import at.mhofer.jam.data.constantpool.ConstantPoolInfo;
 import at.mhofer.jam.data.constantpool.ConstantPoolTag;
+import at.mhofer.jam.data.constantpool.UTF8InfoConstant;
 import at.mhofer.jam.data.constantpool.reader.ConstantPoolInfoReader;
 import at.mhofer.jam.data.fields.FieldInfo;
 import at.mhofer.jam.data.fields.FieldInfoReader;
@@ -178,6 +179,10 @@ public class ClassFile
 	 */
 	private AttributeInfo[] attributes;
 
+	private MethodInfo initMethod;
+	
+	private int cpInitIndex;
+
 	public ClassFile(File clazz) throws IOException
 	{
 		this(new FileInputStream(clazz));
@@ -193,7 +198,8 @@ public class ClassFile
 
 		// Read constant pool
 		this.constantPoolCount = in.readUnsignedShort();
-		this.constantPool = new ConstantPoolInfo[constantPoolCount]; //constant_pool_count - 1 elements
+		// constant_pool_count - 1 elements
+		this.constantPool = new ConstantPoolInfo[constantPoolCount];
 		for (int i = 1; i < constantPoolCount; i++)
 		{
 			byte tagCode = in.readByte();
@@ -201,6 +207,16 @@ public class ClassFile
 			ConstantPoolInfoReader reader = ReaderRegistry.getConstantPoolReader(tag);
 			ConstantPoolInfo info = reader.readData(in);
 			constantPool[i] = info;
+			
+			//check if the current constant equals "<init>"
+			if (tag == ConstantPoolTag.UTF8)
+			{
+				String value = ((UTF8InfoConstant)info).getValue();
+				if (value.equals("<init>"))
+				{
+					this.cpInitIndex = i;
+				}
+			}
 		}
 
 		// add the flags to a hashset, because of constant time "contains" check
@@ -210,7 +226,7 @@ public class ClassFile
 		{
 			this.accessFlags.add(flag);
 		}
-		
+
 		this.thisClass = in.readUnsignedShort();
 		this.superClass = in.readUnsignedShort();
 
@@ -230,16 +246,22 @@ public class ClassFile
 		{
 			fields[i] = fieldReader.readData(in);
 		}
-		
+
 		// Read methods
 		MethodInfoReader methodReader = new MethodInfoReader(constantPool);
 		this.methodsCount = in.readUnsignedShort();
 		this.methods = new MethodInfo[methodsCount];
 		for (int i = 0; i < methodsCount; i++)
 		{
-			methods[i] = methodReader.readData(in);
+			MethodInfo method = methodReader.readData(in);
+			methods[i] = method;
+			
+			if(method.getNameIndex() == this.cpInitIndex)
+			{
+				this.initMethod = method;
+			}
 		}
-		
+
 		// Read attributes
 		AttributeInfoReader attributeReader = new AttributeInfoReader(constantPool);
 		this.attributesCount = in.readUnsignedShort();
@@ -247,6 +269,27 @@ public class ClassFile
 		for (int i = 0; i < attributesCount; i++)
 		{
 			attributes[i] = attributeReader.readData(in);
+		}
+
+		in.close();
+	}
+
+	public MethodInfo getInitMethod()
+	{
+		return initMethod;
+	}
+
+	public void printMethods()
+	{
+		for (MethodInfo info : methods)
+		{
+			int nameIndex = info.getNameIndex();
+			ConstantPoolInfo cpInfo = constantPool[nameIndex];
+			if (cpInfo.getTag() == ConstantPoolTag.UTF8)
+			{
+				String name = ((UTF8InfoConstant) cpInfo).getValue();
+				System.out.println(name);
+			}
 		}
 	}
 
@@ -262,7 +305,4 @@ public class ClassFile
 				+ ", methods=" + Arrays.toString(methods) + ", attributesCount=" + attributesCount
 				+ ", attributes=" + Arrays.toString(attributes) + "]";
 	}
-
-
-
 }

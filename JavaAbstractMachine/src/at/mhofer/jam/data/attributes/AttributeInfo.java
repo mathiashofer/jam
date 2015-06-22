@@ -31,18 +31,8 @@ public abstract class AttributeInfo
 		return attributeNameIndex;
 	}
 
-	public void setAttributeNameIndex(int attributeNameIndex)
-	{
-		this.attributeNameIndex = attributeNameIndex;
-	}
-
 	public long getAttributeLength()
 	{
 		return attributeLength;
-	}
-
-	public void setAttributeLength(long attributeLength)
-	{
-		this.attributeLength = attributeLength;
 	}
 }
