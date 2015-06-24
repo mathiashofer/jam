@@ -278,6 +278,11 @@ public class ClassFile
 	{
 		return initMethod;
 	}
+	
+	public ConstantPoolInfo[] getConstantPool()
+	{
+		return constantPool;
+	}
 
 	public void printMethods()
 	{

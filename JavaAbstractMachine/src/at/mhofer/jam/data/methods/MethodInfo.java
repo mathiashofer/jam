@@ -5,6 +5,7 @@ import java.util.HashSet;
 
 import at.mhofer.jam.data.AccessFlag;
 import at.mhofer.jam.data.attributes.AttributeInfo;
+import at.mhofer.jam.data.attributes.CodeAttribute;
 
 public class MethodInfo
 {
@@ -18,8 +19,16 @@ public class MethodInfo
 
 	private AttributeInfo[] attributes;
 
+	/**
+	 * If the method is either native or abstract, its method_info structure
+	 * must not have a Code attribute in its attributes table. Otherwise, its
+	 * method_info structure must have exactly one Code attribute in its
+	 * attributes table.
+	 */
+	private CodeAttribute codeAttribute;
+
 	public MethodInfo(AccessFlag[] accessFlags, int nameIndex, int descriptorIndex,
-			int attributesCount, AttributeInfo[] attributes)
+			int attributesCount, AttributeInfo[] attributes, CodeAttribute codeAttribute)
 	{
 		super();
 
@@ -37,8 +46,14 @@ public class MethodInfo
 		this.descriptorIndex = descriptorIndex;
 		this.attributesCount = attributesCount;
 		this.attributes = attributes;
+		this.codeAttribute = codeAttribute;
 	}
 
+	public CodeAttribute getCodeAttribute()
+	{
+		return codeAttribute;
+	}
+	
 	public HashSet<AccessFlag> getAccessFlags()
 	{
 		return accessFlags;

@@ -2,20 +2,21 @@ package at.mhofer.jam.runtime.data;
 
 import java.util.Stack;
 
+import at.mhofer.jam.data.attributes.LocalVariableTableAttribute;
 import at.mhofer.jam.data.constantpool.ConstantPoolInfo;
-import at.mhofer.jam.runtime.data.variables.Variable;
+import at.mhofer.jam.runtime.data.operands.Operand;
 
 public class StackFrame
 {
 	
 	private ConstantPoolInfo[] constantPool;
 	
-	private Stack<Variable> operandStack;
-	
-	private Variable[] localVariables;
+	private Stack<Operand<?>> operandStack;
+		
+	private LocalVariableTableAttribute localVariables;
 
-	public StackFrame(ConstantPoolInfo[] constantPool, Stack<Variable> operandStack,
-			Variable[] localVariables)
+	public StackFrame(ConstantPoolInfo[] constantPool, Stack<Operand<?>> operandStack,
+			LocalVariableTableAttribute localVariables)
 	{
 		super();
 		this.constantPool = constantPool;
@@ -23,17 +24,27 @@ public class StackFrame
 		this.localVariables = localVariables;
 	}
 
+	public StackFrame(ConstantPoolInfo[] constantPool, LocalVariableTableAttribute localVariables)
+	{
+		super();
+		this.constantPool = constantPool;
+		this.operandStack = new Stack<>();
+		this.localVariables = localVariables;
+	}
+
+
+
 	public ConstantPoolInfo[] getConstantPool()
 	{
 		return constantPool;
 	}
 
-	public Stack<Variable> getOperandStack()
+	public Stack<Operand<?>> getOperandStack()
 	{
 		return operandStack;
 	}
 
-	public Variable[] getLocalVariables()
+	public LocalVariableTableAttribute getLocalVariables()
 	{
 		return localVariables;
 	}

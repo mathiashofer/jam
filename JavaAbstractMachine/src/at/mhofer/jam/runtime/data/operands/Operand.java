@@ -1,10 +1,10 @@
-package at.mhofer.jam.runtime.data.variables;
+package at.mhofer.jam.runtime.data.operands;
 
-public abstract class Variable<T>
+public abstract class Operand<T>
 {
 	private T value;
 
-	public Variable(T value)
+	public Operand(T value)
 	{
 		this.value = value;
 	}

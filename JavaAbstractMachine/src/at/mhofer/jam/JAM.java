@@ -3,6 +3,7 @@ package at.mhofer.jam;
 import java.io.File;
 
 import at.mhofer.jam.data.ClassFile;
+import at.mhofer.jam.runtime.Processor;
 
 public class JAM
 {
@@ -18,9 +19,9 @@ public class JAM
 	
 		ClassFile clazz = new ClassFile(classfile);
 
-		System.out.println(clazz);
-		
-		clazz.printMethods();
+		Processor processor = new Processor(clazz);
+		Thread processorThread = new Thread(processor);
+		processorThread.start();
 	}
 	
 }

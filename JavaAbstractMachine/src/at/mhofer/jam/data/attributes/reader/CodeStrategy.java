@@ -8,7 +8,10 @@ import at.mhofer.jam.data.U4Array;
 import at.mhofer.jam.data.attributes.AttributeInfo;
 import at.mhofer.jam.data.attributes.CodeAttribute;
 import at.mhofer.jam.data.attributes.ExceptionIndexTableEntry;
+import at.mhofer.jam.data.attributes.LocalVariableTableAttribute;
 import at.mhofer.jam.data.constantpool.ConstantPoolInfo;
+import at.mhofer.jam.data.constantpool.ConstantPoolTag;
+import at.mhofer.jam.data.constantpool.UTF8InfoConstant;
 
 public class CodeStrategy implements AttributeInfoReaderStrategy
 {
@@ -49,15 +52,27 @@ public class CodeStrategy implements AttributeInfoReaderStrategy
 
 		ConstantPoolInfo[] constantPool = constantPoolSource.getValue();
 		AttributeInfoReader reader = new AttributeInfoReader(constantPool);
+		LocalVariableTableAttribute localVariableAttribute = null;
 		AttributeInfo[] attributes = new AttributeInfo[attributesCount];
 		for (int i = 0; i < attributesCount; i++)
 		{
 			AttributeInfo attribute = reader.readData(in);
 			attributes[i] = attribute;
+			
+			//check if the current attribute is the local variable attribute
+			ConstantPoolInfo cpInfo = constantPool[attribute.getAttributeNameIndex()];
+			if (cpInfo.getTag() == ConstantPoolTag.UTF8)
+			{
+				UTF8InfoConstant constant = (UTF8InfoConstant) cpInfo;
+				if (constant.getValue().equals("LocalVariableTable") && attribute instanceof LocalVariableTableAttribute)
+				{
+					localVariableAttribute = (LocalVariableTableAttribute) attribute;
+				}
+			}
 		}
 
 		return new CodeAttribute(attributeNameIndex, attributeLength, maxStack, maxLocals,
-				codeLength, code, exceptionTableLength, exceptionTable, attributesCount, attributes);
+				codeLength, code, exceptionTableLength, exceptionTable, attributesCount, attributes, localVariableAttribute);
 	}
 
 	private ExceptionIndexTableEntry readExceptionIndexTableEntry(DataInputStream in)

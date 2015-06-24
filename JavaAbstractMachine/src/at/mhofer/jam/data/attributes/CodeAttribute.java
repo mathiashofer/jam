@@ -19,10 +19,12 @@ public class CodeAttribute extends AttributeInfo
 	private int attributesCount;
 	
 	private AttributeInfo[] attributes;
+	
+	private LocalVariableTableAttribute localVariableTableAttribute;
 
 	public CodeAttribute(int attributeNameIndex, long attributeLength, int maxStack, int maxLocals,
 			long codeLength, U4Array<Byte> code, int exceptionTableLength, ExceptionIndexTableEntry[] exceptionTable,
-			int attributesCount, AttributeInfo[] attributes)
+			int attributesCount, AttributeInfo[] attributes, LocalVariableTableAttribute localVariableTableAttribute)
 	{
 		super(attributeNameIndex, attributeLength);
 		this.maxStack = maxStack;
@@ -33,6 +35,12 @@ public class CodeAttribute extends AttributeInfo
 		this.exceptionTable = exceptionTable;
 		this.attributesCount = attributesCount;
 		this.attributes = attributes;
+		this.localVariableTableAttribute = localVariableTableAttribute;
+	}
+	
+	public LocalVariableTableAttribute getLocalVariableTableAttribute()
+	{
+		return localVariableTableAttribute;
 	}
 
 	public int getMaxStack()

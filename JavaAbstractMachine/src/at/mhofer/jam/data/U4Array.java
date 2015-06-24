@@ -135,6 +135,11 @@ public class U4Array<T> implements Iterable<T>
 			this.array2.set((int) (index - MAX_ARRAY_LENGTH), elem);
 		}
 	}
+	
+	public long getLength()
+	{
+		return length;
+	}
 
 	@Override
 	public Iterator<T> iterator()
