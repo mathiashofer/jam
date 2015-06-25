@@ -19,4 +19,10 @@ public abstract class Operand<T>
 		this.value = value;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "Operand [value=" + value + "]";
+	}
+
 }

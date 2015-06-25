@@ -181,7 +181,14 @@ public class ClassFile
 
 	private MethodInfo initMethod;
 	
-	private int cpInitIndex;
+	/**
+	 * Can be null
+	 */
+	private MethodInfo mainMethod;
+	
+	private int cpInitIndex = -1;
+	
+	private int cpMainIndex = -1;
 
 	public ClassFile(File clazz) throws IOException
 	{
@@ -215,6 +222,10 @@ public class ClassFile
 				if (value.equals("<init>"))
 				{
 					this.cpInitIndex = i;
+				}
+				else if (value.equals("main"))
+				{
+					this.cpMainIndex = i;
 				}
 			}
 		}
@@ -260,6 +271,10 @@ public class ClassFile
 			{
 				this.initMethod = method;
 			}
+			else if (method.getNameIndex() == this.cpMainIndex)
+			{
+				this.mainMethod = method;
+			}
 		}
 
 		// Read attributes
@@ -279,9 +294,94 @@ public class ClassFile
 		return initMethod;
 	}
 	
+	public MethodInfo getMainMethod()
+	{
+		return mainMethod;
+	}
+	
 	public ConstantPoolInfo[] getConstantPool()
 	{
 		return constantPool;
+	}
+	
+	public int getMagic()
+	{
+		return magic;
+	}
+
+	public int getMinorVersion()
+	{
+		return minorVersion;
+	}
+
+	public int getMajorVersion()
+	{
+		return majorVersion;
+	}
+
+	public int getConstantPoolCount()
+	{
+		return constantPoolCount;
+	}
+
+	public HashSet<AccessFlag> getAccessFlags()
+	{
+		return accessFlags;
+	}
+
+	public int getThisClass()
+	{
+		return thisClass;
+	}
+
+	public int getSuperClass()
+	{
+		return superClass;
+	}
+
+	public int getInterfacesCount()
+	{
+		return interfacesCount;
+	}
+
+	public int[] getInterfaces()
+	{
+		return interfaces;
+	}
+
+	public int getFieldsCount()
+	{
+		return fieldsCount;
+	}
+
+	public FieldInfo[] getFields()
+	{
+		return fields;
+	}
+
+	public int getMethodsCount()
+	{
+		return methodsCount;
+	}
+
+	public MethodInfo[] getMethods()
+	{
+		return methods;
+	}
+
+	public int getAttributesCount()
+	{
+		return attributesCount;
+	}
+
+	public AttributeInfo[] getAttributes()
+	{
+		return attributes;
+	}
+
+	public int getCpInitIndex()
+	{
+		return cpInitIndex;
 	}
 
 	public void printMethods()

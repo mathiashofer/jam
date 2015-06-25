@@ -83,4 +83,12 @@ public class LocalVariableTableEntry
 	{
 		return index;
 	}
+
+	@Override
+	public String toString()
+	{
+		return "LocalVariableTableEntry [startPC=" + startPC + ", length=" + length
+				+ ", nameIndex=" + nameIndex + ", descriptorIndex=" + descriptorIndex + ", index="
+				+ index + "]";
+	}
 }

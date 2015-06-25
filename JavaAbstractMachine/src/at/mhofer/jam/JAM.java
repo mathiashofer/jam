@@ -18,7 +18,6 @@ public class JAM
 		File classfile = new File(testcase1);
 	
 		ClassFile clazz = new ClassFile(classfile);
-
 		Processor processor = new Processor(clazz);
 		Thread processorThread = new Thread(processor);
 		processorThread.start();
