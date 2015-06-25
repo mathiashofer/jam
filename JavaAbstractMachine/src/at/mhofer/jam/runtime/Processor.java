@@ -97,7 +97,7 @@ public class Processor implements Runnable, OpCodes
 			case GOTO:
 				byte branchByte1 = instructions.get(pc + 1);
 				byte branchByte2 = instructions.get(pc + 2);
-				int branchOffset = ((branchByte1 << 8) | branchByte2) & 0xFF;
+				int branchOffset = ((branchByte1 << 8) | branchByte2);
 				// -1 because the pc gets increased by 1 after the execution
 				pc = pc + branchOffset - 1;
 				break;
@@ -110,28 +110,41 @@ public class Processor implements Runnable, OpCodes
 			case IINC:
 				int index = instructions.get(pc + 1) & 0xFF; // unsigned
 				int iconst = instructions.get(pc + 2);
+				System.out.println(index);
 				ilocal = (IntOperand) frame.getLocalVariables()[index];
 				ilocal.setValue(ilocal.getValue() + iconst);
+				pc += 2;
 				break;
 			case ALOAD_0:
 				ReferenceOperand ref = (ReferenceOperand) frame.getLocalVariables()[0];
 				frame.pushOperand(ref);
 				break;
+			case ILOAD_0:
+				frame.pushOperand(frame.getLocalVariables()[0]);
+				break;
+			case ILOAD_1:
+				frame.pushOperand(frame.getLocalVariables()[1]);
+				break;
 			case ILOAD_2:
 				frame.pushOperand(frame.getLocalVariables()[2]);
 				break;
 			case IF_ICMPLE:
-				ioperand1 = (IntOperand) frame.popOperand();
 				ioperand2 = (IntOperand) frame.popOperand();
+				ioperand1 = (IntOperand) frame.popOperand();
 				if (ioperand1.getValue() <= ioperand2.getValue())
 				{
+					System.out.println(ioperand1 + " <= " + ioperand2);
+
 					branchByte1 = instructions.get(pc + 1);
 					branchByte2 = instructions.get(pc + 2);
-					branchOffset = ((branchByte1 << 8) | branchByte2) & 0xFF;
+					branchOffset = ((branchByte1 << 8) | branchByte2);
 					// -1 because the pc gets increased by 1 after the execution
 					pc = pc + branchOffset - 1;
 				}
-				pc += 2; // skip the branch bytes
+				else
+				{
+					pc += 2; // skip the branch bytes
+				}
 				break;
 			case RETURN:
 				frame.printLocalVariables();
@@ -182,7 +195,7 @@ public class Processor implements Runnable, OpCodes
 						OpCodeUtil.nameByValue(instruction));
 				return;
 			}
-			
+
 			// next instruction
 			pc = pc + 1;
 		}
