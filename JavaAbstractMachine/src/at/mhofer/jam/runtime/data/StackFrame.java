@@ -10,12 +10,12 @@ public class StackFrame
 	
 	private ConstantPoolInfo[] constantPool;
 	
-	private Stack<Operand<?>> operandStack;
+	private Stack<DataType> operandStack;
 		
-	private Operand<?>[] localVariables;
+	private DataType[] localVariables;
 
-	public StackFrame(ConstantPoolInfo[] constantPool, Stack<Operand<?>> operandStack,
-			Operand<?>[] localVariables)
+	public StackFrame(ConstantPoolInfo[] constantPool, Stack<DataType> operandStack,
+			Operand[] localVariables)
 	{
 		super();
 		this.constantPool = constantPool;
@@ -23,24 +23,28 @@ public class StackFrame
 		this.localVariables = localVariables;
 	}
 
-	public StackFrame(ConstantPoolInfo[] constantPool, Operand<?>[] localVariables)
+	public StackFrame(ConstantPoolInfo[] constantPool, DataType[] localVariables)
 	{
 		super();
 		this.constantPool = constantPool;
-		this.operandStack = new Stack<>();
+		this.operandStack = new Stack<DataType>();
 		this.localVariables = localVariables;
 	}
 
-	
-
-	public Operand<?> pushOperand(Operand<?> operand)
+	public DataType push(DataType operand)
 	{
 		return operandStack.push(operand);
 	}
 	
-	public Operand<?> popOperand()
+	public DataType pop()
 	{
-		Operand<?> popped = operandStack.pop();
+		return operandStack.pop();
+	}
+	
+	public Operand popOperand()
+	{
+		//TODO: type safety
+		Operand popped = (Operand) operandStack.pop();
 		return popped;
 	}
 
@@ -49,19 +53,35 @@ public class StackFrame
 		return constantPool;
 	}
 
-	public Stack<Operand<?>> getOperandStack()
+	public Stack<DataType> getOperandStack()
 	{
 		return operandStack;
 	}
 
-	public Operand<?>[] getLocalVariables()
+	public DataType[] getLocalVariables()
 	{
 		return localVariables;
 	}
 	
+	public DataType getLocalVariableAt(int index)
+	{
+		return localVariables[index];
+	}
+	
+	public Operand getLocalOperandAt(int index)
+	{
+		//TODO: type safety
+		return (Operand) getLocalVariableAt(index);
+	}
+	
+	public void setLocalVariableAt(DataType variable, int index)
+	{
+		this.localVariables[index] = variable;
+	}
+	
 	public void printLocalVariables()
 	{
-		for (Operand<?> local : localVariables)
+		for (DataType local : localVariables)
 		{
 			System.out.println(local);
 		}
@@ -69,7 +89,7 @@ public class StackFrame
 
 	public void printOperandStack()
 	{
-		for (Operand<?> op : operandStack)
+		for (DataType op : operandStack)
 		{
 			System.out.println(op);
 		}

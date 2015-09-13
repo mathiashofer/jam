@@ -2,14 +2,13 @@ package at.mhofer.jam.runtime.data;
 
 import at.mhofer.jam.data.ClassFile;
 import at.mhofer.jam.data.methods.MethodInfo;
-import at.mhofer.jam.runtime.data.operands.ReferenceOperand;
 
 public final class MethodArea
 {
 
 	private static TupleKeyHashMap<Integer, Integer, MethodInfo> methodsPerClass = new TupleKeyHashMap<Integer, Integer, MethodInfo>();
 
-	public static MethodInfo getMethodPerClass(ReferenceOperand clazz, ReferenceOperand method)
+	public static MethodInfo getMethodPerClass(Reference clazz, Reference method)
 	{
 		return methodsPerClass.get(clazz.getValue(), method.getValue());
 	}
