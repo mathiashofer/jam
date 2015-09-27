@@ -4,6 +4,17 @@ public class IntOperand extends Operand
 {
 	private int value;
 
+	/*
+	 * Some constants
+	 */
+	public static final IntOperand MINUS_ONE = new IntOperand(-1);
+	public static final IntOperand ZERO = new IntOperand(0);
+	public static final IntOperand ONE = new IntOperand(1);
+	public static final IntOperand TWO = new IntOperand(2);
+	public static final IntOperand THREE = new IntOperand(3);
+	public static final IntOperand FOUR = new IntOperand(4);
+	public static final IntOperand FIVE = new IntOperand(5);
+
 	public IntOperand(int value)
 	{
 		this.value = value;

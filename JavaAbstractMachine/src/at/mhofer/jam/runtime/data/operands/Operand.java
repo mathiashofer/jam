@@ -2,6 +2,12 @@ package at.mhofer.jam.runtime.data.operands;
 
 import at.mhofer.jam.runtime.data.DataType;
 
+/**
+ * The implementations of Operand have to be immutable
+ * 
+ * @author Mathias
+ *
+ */
 public abstract class Operand implements DataType, Comparable<Operand>
 {
 

@@ -13,7 +13,7 @@ public class JAM
 
 	public static void main(String[] args) throws Exception
 	{
-		File classfile = new File(testcase1);
+		File classfile = new File(testcase2);
 	
 		ClassFile clazz = new ClassFile(classfile);
 		Processor processor = new Processor(clazz);

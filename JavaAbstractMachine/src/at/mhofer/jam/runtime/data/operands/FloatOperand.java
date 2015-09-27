@@ -2,6 +2,9 @@ package at.mhofer.jam.runtime.data.operands;
 
 public class FloatOperand extends Operand
 {
+	
+	public static final FloatOperand ZERO = new FloatOperand(0);
+	public static final FloatOperand ONE = new FloatOperand(1);
 
 	private float value;
 

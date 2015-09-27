@@ -68,6 +68,17 @@ public class StackFrame
 		return localVariables[index];
 	}
 	
+	public void setLocalVariableAt(int index, DataType variable)
+	{
+		this.localVariables[index] = variable;
+	}
+	
+	public Reference getLocalReferenceAt(int index)
+	{
+		//TODO: type safety
+		return (Reference) getLocalVariableAt(index);
+	}
+	
 	public Operand getLocalOperandAt(int index)
 	{
 		//TODO: type safety

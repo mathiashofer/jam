@@ -2,6 +2,9 @@ package at.mhofer.jam.runtime.data.operands;
 
 public class LongOperand extends Operand
 {
+	
+	public static final LongOperand ZERO = new LongOperand(0);
+	public static final LongOperand ONE = new LongOperand(1);
 
 	private long value;
 

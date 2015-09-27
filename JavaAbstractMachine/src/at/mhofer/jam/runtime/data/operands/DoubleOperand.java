@@ -2,6 +2,9 @@ package at.mhofer.jam.runtime.data.operands;
 
 public class DoubleOperand extends Operand
 {
+	public static final DoubleOperand ZERO = new DoubleOperand(0);
+	public static final DoubleOperand ONE = new DoubleOperand(1);
+	
 	private double value;
 
 	public DoubleOperand(double value)

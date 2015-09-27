@@ -2,12 +2,18 @@ package at.mhofer.jam.runtime.data;
 
 public class Reference implements DataType
 {
+	public static final Reference NULL = new Reference(null);
 
 	private Integer value;
 
 	public Reference(Integer value)
 	{
 		this.value = value;
+	}
+	
+	public boolean isNull()
+	{
+		return value == null;
 	}
 
 	@Override
