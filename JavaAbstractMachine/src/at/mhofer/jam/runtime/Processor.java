@@ -68,10 +68,9 @@ public class Processor implements Runnable, OpCodes
 
 			Operand operand1 = null;
 			Operand operand2 = null;
-			Operand result = null;
 			Operand local = null;
 
-			// decode and execute
+			// execute
 			switch (instruction)
 			{
 			case BIPUSH:
@@ -87,7 +86,9 @@ public class Processor implements Runnable, OpCodes
 				pc = pc + branchOffset - 1;
 				break;
 			case IADD:
-				frame.push(add(frame));
+				operand1 = frame.popOperand();
+				operand2 = frame.popOperand();
+				frame.push(operand1.add(operand2));
 				break;
 			case IINC:
 				int index = instructions.get(pc + 1) & 0xFF; // unsigned
@@ -224,24 +225,12 @@ public class Processor implements Runnable, OpCodes
 		this.instructions = code != null ? code.getCode() : null;
 	}
 	
-	private Operand add(StackFrame frame)
-	{
-		Operand operand1 = frame.popOperand();
-		Operand operand2 = frame.popOperand();
-		return operand1.add(operand2);
-	}
-
 	private void store(StackFrame frame, int index)
 	{
 		Operand operand = frame.popOperand();
 		frame.setLocalVariableAt(index, operand);
 	}
 
-	private void load(int index)
-	{
-
-	}
-	
 	private int readIndexBytes(int pc)
 	{
 		int indexByte1 = instructions.get(pc + 1);
